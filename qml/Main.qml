@@ -609,7 +609,7 @@ MainView {
                         btn_eq_on.enabled=true
                         btn_eq_off.enabled=false
                         combo_output.enabled=true
-                        python.call("example.eq_on", [], function () {
+                        python.call("example.eq_off", [], function () {
                         })
                     }
                 }

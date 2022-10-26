@@ -15,6 +15,7 @@
 '''
 import pyotherside
 import subprocess
+import os
 
 command = ""
 
@@ -36,17 +37,54 @@ module_number = ""
 
 
 def eq_on():
-  output = subprocess.getoutput('export LADSPA_PATH=/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib')
-  pyotherside.send('debug-info', "LADSPA_PATH variable exported")
 
-  module_number = subprocess.getoutput('pactl load-module module-ladspa-sink sink_name=ladspa_out master=sink.primary_output plugin=caps label=Eq10X2 control=0,0,0,0,0,6,0,0,0,0')
-  pyotherside.send('debug-info', 'Ladspa Plugin caps.so loaded with number '+module_number)
+
+  existing = subprocess.getoutput('[ -e "/usr/lib/ladspa/caps.so" ] && echo 1 || echo 0') # 1= existing 0 = not existing
+  pyotherside.send('debug-info', "Plugin caps.so exists? : "+existing)
+  if (existing == "0"):
+    pyotherside.send('debug-info', "Plugin caps.so not found")
+    pyotherside.send('debug-info', "Create folder: /usr/lib/ladspa")
+    output = subprocess.getoutput('mkdir /usr/lib/ladspa/')
+    pyotherside.send('debug-info', "Result : "+output)
+    pyotherside.send('debug-info', "Copy caps.so to: /usr/lib/ladspa/")
+    output = subprocess.getoutput('cp /opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib/caps.so /usr/lib/ladspa/caps.so')
+    pyotherside.send('debug-info', "Result : "+output)
+  else:
+    pyotherside.send('debug-info', "Plugin caps.so found")
+    
+
+  existing = subprocess.getoutput('[ -e "/usr/lib/ladspa/caps.so" ] && echo 1 || echo 0') # 1= existing 0 = not existing
+  #pyotherside.send('debug-info', "Plugin caps.so exists? : "+existing)
+
+  if (existing == "1"):
+    module_number = subprocess.getoutput('pactl load-module module-ladspa-sink sink_name=ladspa_out master=sink.primary_output plugin=caps label=Eq10X2 control=0,0,0,0,0,6,0,0,0,0')
+    pyotherside.send('debug-info', 'Ladspa Plugin caps.so loaded with number '+module_number)
+    
+
+
+
+
+
+  #output = subprocess.getoutput('[ -e "/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib/caps.so" ] && echo 1 || echo 0')
+  #pyotherside.send('debug-info', "Check if caps.so is present: "+output)
+  #output = subprocess.getoutput('export LADSPA_PATH=/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib')
+  #os.environ["LADSPA_PATH"] = "/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib"
+  #subprocess.call('export LADSPA_PATH=/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib')
+  #output = subprocess.getoutput('echo $LADSPA_PATH')
+  #pyotherside.send('debug-info', "LADSPA_PATH variable exported with path: "+output)
+
+  # if (output == ""):
+  #   pyotherside.send('debug-info', 'Path could not be set')
+  # else:
+  #   module_number = subprocess.getoutput('pactl load-module module-ladspa-sink sink_name=ladspa_out master=sink.primary_output plugin=caps label=Eq10X2 control=0,0,0,0,0,6,0,0,0,0')
+  #   pyotherside.send('debug-info', 'Ladspa Plugin caps.so loaded with number '+module_number)
 
 
 def eq_off():
+  if (module_number != ""):
+    output = subprocess.getoutput('pactl unload-module module-ladspa-sink')
+    pyotherside.send('debug-info', 'pulseaudio plugins with name -module-ladspa-sink unloadeded')
   module_number = ""
-  output = subprocess.getoutput('pactl unload-module module-ladspa-sink')
-  pyotherside.send('debug-info', 'pulseaudio plugins with name -module-ladspa-sink unloadeded')
 
 
 
