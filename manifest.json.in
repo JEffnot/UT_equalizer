@@ -1,0 +1,15 @@
+{
+    "name": "equalizer.jeffnot",
+    "description": "Fixed 10 Band Equalizer for Ubuntu Touch",
+    "architecture": "@CLICK_ARCH@",
+    "title": "Equalizer",
+    "hooks": {
+        "equalizer": {
+            "apparmor": "equalizer.apparmor",
+            "desktop":  "equalizer.desktop"
+        }
+    },
+    "version": "1.0.0",
+    "maintainer": "Jeffnot <email@domain.org>",
+    "framework" : "@CLICK_FRAMEWORK@"
+}
