@@ -1,13 +1,6 @@
 {
     "template": "unconfined",
     "policy_groups": [],
-    "policy_version": 16.04,
-    "write_path": [
-        "/usr/lib/ladspa/",
-        "/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib/"
-    ],
-    "read_path": [
-        "/usr/lib/ladspa/",
-        "/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib/"
-    ]
+    "policy_version": 16.04
 }
+

@@ -15,7 +15,6 @@
  */
 
 import QtQuick 2.7
-//import QtCharts 2.4
 import Ubuntu.Components 1.3
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.2
@@ -32,17 +31,12 @@ MainView {
     property var height_space_items: 100
     property var dbhz_display_margin: 40
     property var dbhz_text_size: 15
-
-
-    //width: units.gu(45)
-    //height: units.gu(75)
-    //width: parent.width
-    //height: parent.height
+    property var slider_enabled: true
+    property var max_dB: 20
+    property var min_dB: -20
+    property var slider_step: 2
 
     Page {
-
-        //anchors.fill: parent
-        //width: parent.width
 
         header: PageHeader {
             id: panel_header
@@ -51,10 +45,8 @@ MainView {
 
         ColumnLayout{
             id: main_column
-            //anchors.fill: parent
             Layout.fillWidth: true
             spacing : 0
-            //width: parent.width
 
             Item {
                 id: spacer_header
@@ -64,10 +56,8 @@ MainView {
             RowLayout{
                 id: panel_output
                 spacing: 5
-                //height: 150
                 Layout.fillWidth: true
                 Layout.margins : main_column_margin
-                //width: parent.width
 
                 Label{
                     id: lbl_select_output
@@ -99,7 +89,6 @@ MainView {
                 id: panel_preset
                 spacing: 5
                 height: 150
-                //width: parent.width
                 Layout.fillWidth: true
                 Layout.margins : main_column_margin
 
@@ -113,8 +102,8 @@ MainView {
                     Layout.fillWidth: true
                     model: ListModel {
                         ListElement { text: "Flat" }
+                        ListElement { text: "Custom" }
                         ListElement { text: "Bass Boost" }
-                        ListElement { text: "Mid Boost" }
                     }
                 onActivated: (index) => { print(textAt(index)) }
                 }     
@@ -146,10 +135,10 @@ MainView {
 
                     Slider {
                         id: slider_31
-                        //function formatValue(v64) { return v32.toFixed(2) }
-                        from: -15.0
-                        to: 15.0
-                        stepSize: 1.0
+                        enabled: slider_enabled
+                        from: min_dB
+                        to: max_dB
+                        stepSize: slider_step
                         value: 0.0
                         live: true
                         snapMode: Slider.SnapAlways
@@ -158,8 +147,7 @@ MainView {
                             lbl_31dB.text=value
                             python.call("example.get_slider_31", [value], function () {
                             })
-                        }
-                        
+                        }   
                     }
 
                     Text{
@@ -186,10 +174,10 @@ MainView {
 
                     Slider {
                         id: slider_62
-                        //function formatValue(v64) { return v64.toFixed(2) }
-                        from: -15.0
-                        to: 15.0
-                        stepSize: 1.0
+                        enabled: slider_enabled
+                        from: min_dB
+                        to: max_dB
+                        stepSize: slider_step
                         value: 0.0
                         live: true
                         snapMode: Slider.SnapAlways
@@ -222,13 +210,12 @@ MainView {
                         Layout.margins : dbhz_display_margin
                     }
 
-
                     Slider {
                         id: slider_125
-                        //function formatValue(v64) { return v64.toFixed(2) }
-                        from: -15.0
-                        to: 15.0
-                        stepSize: 1.0
+                        enabled: slider_enabled
+                        from: min_dB
+                        to: max_dB
+                        stepSize: slider_step
                         value: 0.0
                         live: true
                         snapMode: Slider.SnapAlways
@@ -264,10 +251,10 @@ MainView {
 
                     Slider {
                         id: slider_250
-                        //function formatValue(v64) { return v64.toFixed(2) }
-                        from: -15.0
-                        to: 15.0
-                        stepSize: 1.0
+                        enabled: slider_enabled
+                        from: min_dB
+                        to: max_dB
+                        stepSize: slider_step
                         value: 0.0
                         live: true
                         snapMode: Slider.SnapAlways
@@ -303,10 +290,10 @@ MainView {
 
                     Slider {
                         id: slider_500
-                        //function formatValue(v64) { return v64.toFixed(2) }
-                        from: -15.0
-                        to: 15.0
-                        stepSize: 1.0
+                        enabled: slider_enabled
+                        from: min_dB
+                        to: max_dB
+                        stepSize: slider_step
                         value: 0.0
                         live: true
                         snapMode: Slider.SnapAlways
@@ -342,10 +329,10 @@ MainView {
 
                     Slider {
                         id: slider_1k
-                        //function formatValue(v64) { return v64.toFixed(2) }
-                        from: -15.0
-                        to: 15.0
-                        stepSize: 1.0
+                        enabled: slider_enabled
+                        from: min_dB
+                        to: max_dB
+                        stepSize: slider_step
                         value: 0.0
                         live: true
                         snapMode: Slider.SnapAlways
@@ -378,13 +365,12 @@ MainView {
                         Layout.margins : dbhz_display_margin
                     }
 
-
                     Slider {
                         id: slider_2k
-                        //function formatValue(v64) { return v64.toFixed(2) }
-                        from: -15.0
-                        to: 15.0
-                        stepSize: 1.0
+                        enabled: slider_enabled
+                        from: min_dB
+                        to: max_dB
+                        stepSize: slider_step
                         value: 0.0
                         live: true
                         snapMode: Slider.SnapAlways
@@ -419,10 +405,10 @@ MainView {
 
                     Slider {
                         id: slider_4k
-                        //function formatValue(v64) { return v64.toFixed(2) }
-                        from: -15.0
-                        to: 15.0
-                        stepSize: 1.0
+                        enabled: slider_enabled
+                        from: min_dB
+                        to: max_dB
+                        stepSize: slider_step
                         value: 0.0
                         live: true
                         snapMode: Slider.SnapAlways
@@ -443,7 +429,6 @@ MainView {
                     }
                 }
 
-
                 ColumnLayout{
                     id: slider_display_8k
                     spacing : 0
@@ -458,10 +443,10 @@ MainView {
 
                     Slider {
                         id: slider_8k
-                        //function formatValue(v64) { return v64.toFixed(2) }
-                        from: -15.0
-                        to: 15.0
-                        stepSize: 1.0
+                        enabled: slider_enabled
+                        from: min_dB
+                        to: max_dB
+                        stepSize: slider_step
                         value: 0.0
                         live: true
                         snapMode: Slider.SnapAlways
@@ -482,7 +467,6 @@ MainView {
                     }
                 }
 
-
                 ColumnLayout{
                     id: slider_display_16k
                     spacing : 0
@@ -496,10 +480,10 @@ MainView {
                     }
                     Slider {
                         id: slider_16k
-                        //function formatValue(v64) { return v64.toFixed(2) }
-                        from: -15.0
-                        to: 15.0
-                        stepSize: 1.0
+                        enabled: slider_enabled
+                        from: min_dB
+                        to: max_dB
+                        stepSize: slider_step
                         value: 0.0
                         live: true
                         snapMode: Slider.SnapAlways
@@ -519,7 +503,6 @@ MainView {
                         Layout.margins : dbhz_display_margin
                     }
                 }
-
             }
 
             Item {
@@ -529,16 +512,11 @@ MainView {
 
             Button {
                 id: btn_reset_fader
-                //width: parent.width
                 Layout.fillWidth: true
                 Layout.margins : main_column_margin
-                //iconName: "compose"
                 text: "Reset Fader to 0dB"
-                //iconPosition: "left"
-                //height: 150
-                //width: 96
                 onClicked: {
-                    print("Flat EQ")
+                    print("EQ flat")
                     slider_31.value = 0
                     slider_62.value = 0
                     slider_125.value = 0
@@ -561,7 +539,6 @@ MainView {
                     lbl_16kdB.text=0
                     python.call("example.flat_eq", [], function () {
                     })
-
                 }
             }
 
@@ -570,29 +547,22 @@ MainView {
                 height: height_space_items
             } // Spacer
 
-
-
             RowLayout {
                 id: panel_eq_on_off
                 spacing: height_space_items
                 Layout.margins : main_column_margin
-                //height: 150
-                //width: parent.width
                 Layout.fillWidth: true
                 Button {
                     id: btn_eq_on
                     text: "EQ on"
                     enabled: true
-                    //height: 150
-                    //Layout.preferredHeight: 150
                     Layout.fillWidth: true
-                    //width: 96
                     onClicked: {
                         print("EQ on")
                         btn_eq_off.enabled=true
                         btn_eq_on.enabled=false
                         combo_output.enabled=false
-                        python.call("example.eq_on", [], function () {
+                        python.call("example.set_eq_on", [], function () {
                         })
                     }
                 }
@@ -600,16 +570,13 @@ MainView {
                     id: btn_eq_off
                     text: "EQ off"
                     enabled: false
-                    //height: 150
-                    //Layout.preferredHeight: 150
                     Layout.fillWidth: true
-                    //width: 96
                     onClicked: {
                         print("EQ off")
                         btn_eq_on.enabled=true
                         btn_eq_off.enabled=false
                         combo_output.enabled=true
-                        python.call("example.eq_off", [], function () {
+                        python.call("example.set_eq_off", [], function () {
                         })
                     }
                 }

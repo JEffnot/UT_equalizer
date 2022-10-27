@@ -15,9 +15,11 @@
 '''
 import pyotherside
 import subprocess
-import os
 
-command = ""
+
+# Global variables
+eq_state = "off"
+control = "0,0,0,0,0,0,0,0,0,0"
 
 slider_values = dict(
   Hz31='0.0',
@@ -32,63 +34,35 @@ slider_values = dict(
   Hz16k='0.0'
   )
 
-
-module_number = ""
-
-
-def eq_on():
+active_module = ""
 
 
-  existing = subprocess.getoutput('[ -e "/usr/lib/ladspa/caps.so" ] && echo 1 || echo 0') # 1= existing 0 = not existing
-  pyotherside.send('debug-info', "Plugin caps.so exists? : "+existing)
-  if (existing == "0"):
-    pyotherside.send('debug-info', "Plugin caps.so not found")
-    pyotherside.send('debug-info', "Create folder: /usr/lib/ladspa")
-    output = subprocess.getoutput('mkdir /usr/lib/ladspa/')
-    pyotherside.send('debug-info', "Result : "+output)
-    pyotherside.send('debug-info', "Copy caps.so to: /usr/lib/ladspa/")
-    output = subprocess.getoutput('cp /opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib/caps.so /usr/lib/ladspa/caps.so')
-    pyotherside.send('debug-info', "Result : "+output)
-  else:
-    pyotherside.send('debug-info', "Plugin caps.so found")
+def set_eq_on():
+  global slider_values
+  global active_module
+  global eq_state
+  global control
+
+  active_module = subprocess.getoutput('pactl load-module module-ladspa-sink sink_name=ladspa_out master=sink.primary_output plugin=caps label=Eq10X2 control='+control)
+  #pyotherside.send('debug-info', 'EQ ON: Ladspa Plugin caps.so loaded with number '+active_module)
+  eq_state = "on"
     
 
-  existing = subprocess.getoutput('[ -e "/usr/lib/ladspa/caps.so" ] && echo 1 || echo 0') # 1= existing 0 = not existing
-  #pyotherside.send('debug-info', "Plugin caps.so exists? : "+existing)
+def set_eq_off():
+  global active_module
+  global eq_state
 
-  if (existing == "1"):
-    module_number = subprocess.getoutput('pactl load-module module-ladspa-sink sink_name=ladspa_out master=sink.primary_output plugin=caps label=Eq10X2 control=0,0,0,0,0,6,0,0,0,0')
-    pyotherside.send('debug-info', 'Ladspa Plugin caps.so loaded with number '+module_number)
-    
-
-
-
-
-
-  #output = subprocess.getoutput('[ -e "/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib/caps.so" ] && echo 1 || echo 0')
-  #pyotherside.send('debug-info', "Check if caps.so is present: "+output)
-  #output = subprocess.getoutput('export LADSPA_PATH=/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib')
-  #os.environ["LADSPA_PATH"] = "/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib"
-  #subprocess.call('export LADSPA_PATH=/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib')
-  #output = subprocess.getoutput('echo $LADSPA_PATH')
-  #pyotherside.send('debug-info', "LADSPA_PATH variable exported with path: "+output)
-
-  # if (output == ""):
-  #   pyotherside.send('debug-info', 'Path could not be set')
-  # else:
-  #   module_number = subprocess.getoutput('pactl load-module module-ladspa-sink sink_name=ladspa_out master=sink.primary_output plugin=caps label=Eq10X2 control=0,0,0,0,0,6,0,0,0,0')
-  #   pyotherside.send('debug-info', 'Ladspa Plugin caps.so loaded with number '+module_number)
-
-
-def eq_off():
-  if (module_number != ""):
+  if (active_module != ""):
     output = subprocess.getoutput('pactl unload-module module-ladspa-sink')
-    pyotherside.send('debug-info', 'pulseaudio plugins with name -module-ladspa-sink unloadeded')
-  module_number = ""
+    pyotherside.send('debug-info', 'EQ OFF: pulseaudio plugins with name -module-ladspa-sink unloadeded')
 
+  active_module = ""
+  eq_state = "off"
 
 
 def flat_eq():
+  global slider_values
+
   slider_values['Hz31'] = '0.0'
   slider_values['Hz62'] = '0.0'
   slider_values['Hz125'] = '0.0'
@@ -99,53 +73,65 @@ def flat_eq():
   slider_values['Hz4k'] = '0.0'
   slider_values['Hz8k'] = '0.0'
   slider_values['Hz16k'] = '0.0'
-  print_slider_values()
+  set_eq()
+
 
 def get_slider_31(slider_31):
   slider_values['Hz31'] = str(slider_31)
-  print_slider_values()
+  set_eq()
+
 
 def get_slider_62(slider_62):
   slider_values['Hz62'] = str(slider_62)
-  print_slider_values()
+  set_eq()
+
 
 def get_slider_125(slider_125):
   slider_values['Hz125'] = str(slider_125)
-  print_slider_values()
+  set_eq()
+
 
 def get_slider_250(slider_250):
   slider_values['Hz250'] = str(slider_250)
-  print_slider_values()
+  set_eq()
+
 
 def get_slider_500(slider_500):
   slider_values['Hz500'] = str(slider_500)
-  print_slider_values()
+  set_eq()
+
 
 def get_slider_1k(slider_1k):
   slider_values['Hz1k'] = str(slider_1k)
-  print_slider_values()
+  set_eq()
+
 
 def get_slider_2k(slider_2k):
   slider_values['Hz2k'] = str(slider_2k)
-  print_slider_values()
+  set_eq()
+
 
 def get_slider_4k(slider_4k):
   slider_values['Hz4k'] = str(slider_4k)
-  print_slider_values()
+  set_eq()
+
 
 def get_slider_8k(slider_8k):
   slider_values['Hz8k'] = str(slider_8k)
-  print_slider_values()
+  set_eq()
+
 
 def get_slider_16k(slider_16k):
   slider_values['Hz16k'] = str(slider_16k)
-  print_slider_values()
+  set_eq()
 
 
+def set_eq():
 
+  global active_module
+  global control
 
-def print_slider_values():
-  command = slider_values['Hz31']+ \
+  control = slider_values['Hz31']+ \
     ','+slider_values['Hz62']+ \
       ','+slider_values['Hz125']+\
         ','+slider_values['Hz250']+\
@@ -153,7 +139,20 @@ def print_slider_values():
             ','+slider_values['Hz1k']+\
               ','+slider_values['Hz2k']+\
                 ','+slider_values['Hz4k']+\
-                  '.'+slider_values['Hz8k']+\
+                  ','+slider_values['Hz8k']+\
                     ','+slider_values['Hz16k']
-  pyotherside.send('debug-info', command)
+
+  #pyotherside.send('debug-info', control)
+
+  if eq_state == "on":
+    # load new eq modul with new settings
+    new_module_number = subprocess.getoutput('pactl load-module module-ladspa-sink sink_name=ladspa_out master=sink.primary_output plugin=caps label=Eq10X2 control='+control)
+    #pyotherside.send('debug-info', 'EQ update: loaded with number '+new_module_number)
+    # delete old module
+    output = subprocess.getoutput('pactl unload-module '+active_module)
+    #pyotherside.send('debug-info', 'Ladspa module unloaded with number '+active_module+ ' '+ output)
+    active_module = new_module_number
+
+
+
 

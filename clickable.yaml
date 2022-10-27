@@ -5,4 +5,8 @@ install_lib:
 - ../equalizer/lib/caps.so
 
 
-# /opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib/caps.so    <--- file will be found here, add this to LADSPA_PATH variable
+# /opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib/
+# needed shared object will be found here -------------------------^
+# export this path to LADSPA_PATH variable
+# add this line to end of file from /home/phablet/.config
+# export LADSPA_PATH=/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib
