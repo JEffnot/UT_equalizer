@@ -1,16 +1,26 @@
 # Stereo Equalizer (Demo)
 
 Fixed 10 Band Equalizer with constant-Q-second order filter.
-It is my first mobil app ever, so please be patient :)
 
-# Current Development State
+![screenshot20221028_214818736](https://user-images.githubusercontent.com/113721750/198720815-00ec550c-52eb-4a31-a439-0f080c66ce49.png)
 
-This app is still under development.
+# Development State
+
+This app is still under development, more features will be included step by step.
 
 Working Features:
 - EQ on/off
 - Flat EQ
 - Boost or cut frequencies by +/- 20dB
+
+# How to install
+
+1. Clone respository
+2. run "clickable"
+3. run "clickable install"
+4. open app first time (needed path variable is exported)
+5. reboot phone
+6. app can be used now
 
 # TODOs
 
@@ -22,14 +32,19 @@ Working Features:
 - Add L/R Balance
 - Add Crossfeed for Headphone
 
-# Security
+# How can you support/help?
+
+Please feel free to install this app and report any bugs or errors. If you wish a new feature or have a comment to the app leave also a comment/issue here.
+I run and develop this app on a Xiaomi Mi A2, so feedback from other device owner are very welcom.
+
+# Security!
 
 This app uses python as backend. It uses command line interface to control the equalizer plugin.
-When you start the app for the first time, you have to reboot your device to use the app.
+When you start the app for the first time, you have to reboot your device to have the app working.
 The app needs to export a variable with the path to the equalizer plugin. This is done at the first start.
-After that you can use the app.
+After the reboot you can use the app.
 
-In terms of the use of command line and exporting variables the app needs to be "unconfined".
+In terms of the use of command line interface and exporting a variable the app needs to be "unconfined". (needs full system access)
 
 ## License
 
