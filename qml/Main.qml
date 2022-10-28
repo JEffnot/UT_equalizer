@@ -28,7 +28,7 @@ MainView {
     automaticOrientation: true
 
     property var main_column_margin: 0
-    property var height_space_items: 100
+    property var height_space_items: 80
     property var dbhz_display_margin: 40
     property var dbhz_text_size: 15
     property var slider_enabled: true
@@ -581,8 +581,25 @@ MainView {
                     }
                 }
             }
+
+            Item {
+                id: spacer_eq_btn_on_off
+                height: height_space_items
+            } // Spacer
+
+            RowLayout{
+                id: panel_no_plugin_path
+                spacing: height_space_items
+                Layout.margins : main_column_margin
+                Layout.fillWidth: true
+                    Text{
+                        id: lbl_no_plugin_path
+                        color: "red"
+                        visible: false
+                        text: " This is the first time you start this app. \n The equalizer-plugin-path has just been set. \n Please reboot your device, so that you can use the app."
+                    }
+            }  
         } // Main Column end
-        
     }// Page end
         
 
@@ -593,7 +610,17 @@ MainView {
             addImportPath(Qt.resolvedUrl('../src/'));
 
             importModule('example', function() {
-                console.log('module imported');
+                console.log('python modul imported');
+                python.call("example.check_ladspa_path", [], function () {
+                })
+            });
+
+            setHandler('plugin_path_ok', function() {
+                lbl_no_plugin_path.visible=false;
+            });
+
+            setHandler('no_plugin_path', function() {
+                lbl_no_plugin_path.visible=true;
             });
 
             setHandler('debug-info', function (text) {

@@ -18,6 +18,8 @@ import subprocess
 
 
 # Global variables
+export_path_string = "export LADSPA_PATH=/opt/click.ubuntu.com/.click/users/phablet/equalizer.jeffnot/lib"
+
 eq_state = "off"
 control = "0,0,0,0,0,0,0,0,0,0"
 
@@ -37,6 +39,26 @@ slider_values = dict(
 active_module = ""
 
 
+def check_ladspa_path():
+  global export_path_string
+  output = subprocess.getoutput('grep -Fx \"'+export_path_string+'\" /home/phablet/.profile')
+  
+  if output == export_path_string:
+    pyotherside.send('debug-info', 'Audio Plugin Path found: '+output)
+    pyotherside.send('plugin_path_ok')
+  else:
+    pyotherside.send('debug-info', 'Audio Plugin Path not found')
+    export_plugin_path()
+
+def export_plugin_path():
+  global export_path_string
+  output = subprocess.getoutput('echo \"'+export_path_string+'\" >> /home/phablet/.profile')
+  pyotherside.send('debug-info', 'Audio Plugin Path added to .config')
+  pyotherside.send('debug-info', 'Please reboot your phone to take effect.')
+  #notify QML Handler
+  pyotherside.send('no_plugin_path')
+  
+
 def set_eq_on():
   global slider_values
   global active_module
@@ -54,7 +76,7 @@ def set_eq_off():
 
   if (active_module != ""):
     output = subprocess.getoutput('pactl unload-module module-ladspa-sink')
-    pyotherside.send('debug-info', 'EQ OFF: pulseaudio plugins with name -module-ladspa-sink unloadeded')
+    #pyotherside.send('debug-info', 'EQ OFF: pulseaudio plugins with name -module-ladspa-sink unloadeded')
 
   active_module = ""
   eq_state = "off"
