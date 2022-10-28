@@ -2,7 +2,7 @@
 
 Fixed 10 Band Equalizer with constant-Q-second order filter.
 
-![screenshot20221028_214818736](https://user-images.githubusercontent.com/113721750/198720815-00ec550c-52eb-4a31-a439-0f080c66ce49.png)
+<img src="https://user-images.githubusercontent.com/113721750/198720815-00ec550c-52eb-4a31-a439-0f080c66ce49.png" width="200">
 
 # Development State
 
