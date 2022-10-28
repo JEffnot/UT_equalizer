@@ -2,7 +2,19 @@
 
 Fixed 10 Band Equalizer with constant-Q-second order filter.
 
+
 <img src="https://user-images.githubusercontent.com/113721750/198720815-00ec550c-52eb-4a31-a439-0f080c66ce49.png" width="400">
+
+
+# How to install
+
+1. Clone respository
+2. run "clickable"
+3. run "clickable install"
+4. open app first time (needed path variable is exported)
+5. reboot phone
+6. app can be used now
+
 
 # Development State
 
@@ -17,14 +29,6 @@ Known Issues:
 - item placement of buttons and sliders struggle with different display resolutions
 - landscape mode is bad, screen is not scrollable
 
-# How to install
-
-1. Clone respository
-2. run "clickable"
-3. run "clickable install"
-4. open app first time (needed path variable is exported)
-5. reboot phone
-6. app can be used now
 
 # TODO
 
@@ -49,6 +53,10 @@ The app needs to export a variable with the path to the equalizer plugin. This i
 After the reboot you can use the app.
 
 In terms of the use of command line interface and exporting a variable the app needs to be "unconfined". (needs full system access)
+
+# Cudos
+
+Thanks Tim for your wonderful plugins! (http://quitte.de/dsp/caps.html)
 
 ## License
 
