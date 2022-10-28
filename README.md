@@ -2,7 +2,7 @@
 
 Fixed 10 Band Equalizer with constant-Q-second order filter.
 
-<img src="https://user-images.githubusercontent.com/113721750/198720815-00ec550c-52eb-4a31-a439-0f080c66ce49.png" width="200">
+<img src="https://user-images.githubusercontent.com/113721750/198720815-00ec550c-52eb-4a31-a439-0f080c66ce49.png" width="400">
 
 # Development State
 
@@ -13,6 +13,10 @@ Working Features:
 - Flat EQ
 - Boost or cut frequencies by +/- 20dB
 
+Known Issues:
+- item placement of buttons and sliders struggle with different display resolutions
+- landscape mode is bad, screen is not scrollable
+
 # How to install
 
 1. Clone respository
@@ -22,7 +26,7 @@ Working Features:
 5. reboot phone
 6. app can be used now
 
-# TODOs
+# TODO
 
 - Layout vertical/horizontal
 - Ubuntu Touch Theme
