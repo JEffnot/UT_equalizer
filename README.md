@@ -1,4 +1,4 @@
-# Stereo Equalizer (Demo)
+# Stereo Equalizer (Beta)
 
 Fixed 10 Band Equalizer with constant-Q-second order filter.
 
