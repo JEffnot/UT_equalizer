@@ -9,7 +9,7 @@ import io.thp.pyotherside 1.4
 Rectangle {
     width: root.width
     height: root.height
-    color: "red"
+    //color: "red"
 
     RowLayout
     {
@@ -19,7 +19,7 @@ Rectangle {
             Rectangle {
             Layout.preferredWidth: root.width * 0.02
             Layout.preferredHeight: root.height
-            color: "grey"
+            //color: "grey"
             }
         }
 
@@ -67,7 +67,7 @@ Rectangle {
             Rectangle {
             Layout.preferredWidth: root.width * 0.02
             Layout.preferredHeight: root.height
-            color: "grey"
+            //color: "grey"
             }
         }
     } // end main row

@@ -10,7 +10,7 @@ import io.thp.pyotherside 1.4
 Rectangle {
     width: root.width
     height: root.height
-    color: "yellow"
+    //color: "yellow"
 
     RowLayout
     {
@@ -20,13 +20,13 @@ Rectangle {
             Rectangle {
             Layout.preferredWidth: root.width * 0.02
             Layout.preferredHeight: root.height
-            color: "grey"
+            //color: "grey"
             }
         }
 
         ColumnLayout{
             id: main_column
-            spacing: root.height * 0.05
+            spacing: root.height * 0.02
             Layout.fillWidth: true
             Layout.preferredWidth: root.width * 0.96
             Layout.preferredHeight: root.height
@@ -58,13 +58,11 @@ Rectangle {
 
                 Text{
                     id: root_width_size
-                    font.pixelSize : 12  // text scaling test
-                    text: root.width + " px"
+                    text: "Screenwidth: " + root.width + " px"
                 }
                 Text{
                     id: root_height_size
-                    font.pointSize : 12.0  // text scaling test
-                    text: root.height + " px"
+                    text: "Screenheight: " + root.height + " px"
                 }
         }
 
@@ -74,7 +72,7 @@ Rectangle {
             Rectangle {
             Layout.preferredWidth: root.width * 0.02
             Layout.preferredHeight: root.height
-            color: "grey"
+            //color: "grey"
             }
         }
 

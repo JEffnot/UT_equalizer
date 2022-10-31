@@ -9,7 +9,7 @@ import io.thp.pyotherside 1.4
 Rectangle {
     width: root.width
     height: root.height
-    color: "green"
+    //color: "green"
 
     RowLayout
     {
@@ -19,7 +19,7 @@ Rectangle {
             Rectangle {
             Layout.preferredWidth: root.width * 0.02
             Layout.preferredHeight: root.height
-            color: "grey"
+            //color: "grey"
             }
         }
 
@@ -30,7 +30,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredWidth: root.width * 0.96
             Layout.preferredHeight: root.height
-            spacing: root.height * 0.05
+            spacing: root.height * 0.02
 
             RowLayout{
                 id: panel_preset
@@ -531,7 +531,7 @@ Rectangle {
                 Rectangle {
                 Layout.preferredWidth: root.width * 0.02
                 Layout.preferredHeight: root.height
-                color: "grey"
+                //color: "grey"
                 }
             }
 
