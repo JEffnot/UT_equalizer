@@ -9,11 +9,12 @@ Fixed 10 Band Equalizer with constant-Q-second order filter.
 # How to install
 
 1. Clone respository
-2. run "clickable"
-3. run "clickable install"
-4. open app first time (needed path variable is exported)
-5. reboot phone
-6. app can be used now
+2. go into cloned directory
+3. run "clickable"
+4. run "clickable install"
+5. open app first time (needed path variable is exported then)
+6. reboot phone
+7. app can be used now
 
 
 # Development State
@@ -42,21 +43,22 @@ Known Issues:
 
 # How can you support/help?
 
-Please feel free to install this app and report any bugs or errors. If you wish a new feature or have a comment to the app leave also a comment/issue here.
-I run and develop this app on a Xiaomi Mi A2, so feedback from other device owner are very welcom.
+Please feel free to install this app and report any bugs or errors. If you wish a new feature or have a comment to the app leave also a message here.
+I run and develop this app on a Xiaomi Mi A2, so feedback from other device owners are very welcome. (screen fitting, sound glitches...)
 
 # Security!
 
 This app uses python as backend. It uses command line interface to control the equalizer plugin.
 When you start the app for the first time, you have to reboot your device to have the app working.
-The app needs to export a variable with the path to the equalizer plugin. This is done at the first start.
-After the reboot you can use the app.
+The app needs to export a variable with the path to the equalizer plugin. This is done at the first start and will take effect after reboot.
+After your phone is booted up again, you can use the equalizer app and tweak the sound you like.
 
-In terms of the use of command line interface and exporting a variable the app needs to be "unconfined". (needs full system access)
+In terms of the use of command line interface and exporting a variable the app needs to be marked as "unconfined".
+
 
 # Cudos
 
-Thanks Tim for your wonderful plugins! (http://quitte.de/dsp/caps.html)
+Thanks Tim for your wonderful sound plugins! (http://quitte.de/dsp/caps.html)
 
 ## License
 
