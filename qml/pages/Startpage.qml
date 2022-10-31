@@ -32,29 +32,16 @@ Rectangle {
             Layout.preferredHeight: root.height
 
 
-                RowLayout{
-                    id: panel_output
-                    //Layout.preferredWidth: root.width * 0.96
-                    //Layout.preferredHeight: root.height
-                    
-                    Label{
-                        id: lbl_select_output
-                        Layout.fillWidth: true
-                        text: "Select Audio-Output: "
-                        fontSizeMode: Text.Fit
-                    }
-                    ComboBox {
-                        id: combo_output
-                        enabled: true
-                        Layout.fillWidth: true
-                        model: ListModel {
-                            ListElement { text: "Speaker" }
-                            ListElement { text: "Heaphone Jack" }
-                            ListElement { text: "USB DAC" }
-                        }
-                    onActivated: (index) => { print(textAt(index)) }
-                    }     
+            Text{
+                text: "Release <b>Alpha</b>"
                 }
+
+            Text{
+                width: root.width * 0.96
+                wrapMode: text.WordWrap
+                //text: "EQ will set your sound output fixed to speaker. \nOutput source selection is not implemented yet.  \nEQ Preset not implemented yet. \nBalancing not implemented yet."
+                text: "EQ will set your sound output fixed to speaker. Output source selection is not implemented yet. EQ Preset not implemented yet. Balancing not implemented yet."
+            }
 
         }
 

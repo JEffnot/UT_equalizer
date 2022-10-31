@@ -27,6 +27,7 @@ Working Features:
 - Boost or cut frequencies by +/- 20dB
 
 Known Issues:
+- the sound output of your device will be hard set to speaker (feater: select audio output source not implemented yet)
 - item placement of buttons and sliders struggle with different display resolutions
 - landscape mode is bad, screen is not scrollable
 - if you switch on eq there is a slight volume increase

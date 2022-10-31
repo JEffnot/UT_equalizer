@@ -36,12 +36,19 @@ MainView {
     property var max_dB: 20
     property var min_dB: -20
     property var slider_step: 2
+    property var slider_snapMode: SnapAlways//SnapOnRelease
+
 
     SwipeView {
         id: view
-
         currentIndex: 0
         anchors.fill: parent
+
+        Item {
+            id: page_Startpage
+            clip:true
+            Page.Startpage {}
+        }
 
         Item {
             id: page_Config
@@ -84,19 +91,7 @@ MainView {
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
-    Popup {
-        id: app_info
-        x: root.width * 0.2
-        y: root.height * 0.2
-        width: root.width * 0.6
-        height: root.width * 0.6
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
-        Text{
-            text: "this is an app information popup"
-        }
-    }
+
 
 
     Python {
@@ -123,7 +118,7 @@ MainView {
                 console.log('debug-info: ' + text);
             });
 
-            app_info.open()
+            
         }
 
         onError: {
