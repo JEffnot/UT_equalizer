@@ -7,10 +7,13 @@ import io.thp.pyotherside 1.4
 
 
 
+
 Rectangle {
     width: root.width
     height: root.height
     //color: "yellow"
+
+    property var sink_list: []
 
     RowLayout
     {
@@ -44,30 +47,32 @@ Rectangle {
                 <li>EQ Preset not implemented yet. \nBalancing not implemented yet.</li></ul>"
             }
 
-            ListView {
-                Layout.fillWidth: true
-
-                model: ListModel {
-                    id: sink_list
-                }
-                delegate: Text {
-                    // Both "name" and "team" are taken from the model
-                    text: sink_name
-                }
-            }
-            // ComboBox {
-            //     id: combo_output
-            //     enabled: true
+            // ListView {
             //     Layout.fillWidth: true
 
             //     model: ListModel {
-            //     id: sink_list
+            //         id: sink_list
             //     }
-            //     delegate: Text {
-            //     text: sink_name
-            //     }
-            //     onActivated: (index) => { print(textAt(index)) }
-            // }     
+            //     // delegate: Text {
+            //     //     // Both "name" and "team" are taken from the model
+            //     //     text: sink_name
+            //     // }
+            // }
+            
+            ComboBox {
+                id: combo_output
+                enabled: true
+                Layout.fillWidth: true
+
+                model: ListModel {
+                id: sink_list
+                }
+                delegate: Text {
+                text: sink_name
+                }
+                onActivated: (index) => { print(textAt(index)) }
+            }     
+
 
         }
 
@@ -80,7 +85,5 @@ Rectangle {
             //color: "grey"
             }
         }
-
     }
-
 }

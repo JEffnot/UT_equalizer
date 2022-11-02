@@ -49,7 +49,9 @@ MainView {
         Item {
             id: page_Startpage
             clip:true
-            Page.Startpage {}
+            Page.Startpage {
+                sink_list : root.sink_list
+            }
         }
 
         Item {
@@ -72,9 +74,6 @@ MainView {
     RowLayout{
                 id: panel_no_plugin_path
                 spacing: height_space_items
-                //Layout.margins : main_column_margin
-                //Layout.fillWidth: true
-                //Layout.maximumWidth: parent.width
                     Text{
                         id: lbl_no_plugin_path
                         color: "red"
@@ -114,9 +113,7 @@ MainView {
                     // Load the received data into the list model
                     for (var i=0; i<result.length; i++) {
                         console.log(result[i]);
-                        sink_list.append(result[i])
-
-                        //sink_list.append(result[i]);
+                        root.sink_list.append(result[i]);
                     }
                 });
             });
