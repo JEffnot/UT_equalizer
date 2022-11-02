@@ -22,6 +22,7 @@ export_path_string = "export LADSPA_PATH=/opt/click.ubuntu.com/.click/users/phab
 
 eq_state = "off"
 control = "0,0,0,0,0,0,0,0,0,0"
+volume_offset = "13" # percentage > + when on, - when off
 
 slider_values = dict(
   Hz31='0.0',
@@ -37,6 +38,41 @@ slider_values = dict(
   )
 
 active_module = ""
+inactive_module = ""
+
+device_list = []
+
+
+def get_devices():
+  global device_list
+
+  pyotherside.send('debug-info', "Start Application")
+
+  output = subprocess.getoutput('pactl list sinks short')
+
+  audio_interfaces = output.splitlines()
+    #audio_interfaces = []
+
+  for i in audio_interfaces:
+            #j= i.strip() # delete spaces
+            j= i.split() # split on any whitespace
+            device_list.append({'sink_nr': str(j[0]), 'sink_name': str(j[1]), 'sink_lib': str(j[2]), 'sink_bitrate': str(j[3]), 'sink_samplerate': str(j[4]), 'sink_state': str(j[6])})
+  
+  #pyotherside.send('debug-info', device_list)  
+
+
+  # This is just to get sure, the dictionary is working
+  device_list= [
+        {'sink_name': 'Alpha', 'team': 'red'},
+        {'sink_name': 'Beta', 'team': 'blue'},
+        {'sink_name': 'Gamma', 'team': 'green'},
+        {'sink_name': 'Delta', 'team': 'yellow'},
+        {'sink_name': 'Epsilon', 'team': 'orange'},
+    ]
+  
+  #pyotherside.send('debug-info', device_list)  
+
+  return device_list
 
 
 def check_ladspa_path():
@@ -50,6 +86,7 @@ def check_ladspa_path():
     pyotherside.send('debug-info', 'Audio Plugin Path not found')
     export_plugin_path()
 
+
 def export_plugin_path():
   global export_path_string
   output = subprocess.getoutput('echo \"'+export_path_string+'\" >> /home/phablet/.profile')
@@ -62,20 +99,26 @@ def export_plugin_path():
 def set_eq_on():
   global slider_values
   global active_module
+  global new_module_number
   global eq_state
   global control
 
-  active_module = subprocess.getoutput('pactl load-module module-ladspa-sink sink_name=ladspa_out master=sink.primary_output plugin=caps label=Eq10X2 control='+control)
+
+  output = subprocess.getoutput('pactl -- set-sink-volume 0 -'+volume_offset+'%') # decrease volume, because ther is a slight volume increase when eq on
+  active_module = subprocess.getoutput('pactl load-module module-ladspa-sink sink_name=equalizer master=sink.primary_output plugin=caps label=Eq10X2 control='+control)
   #pyotherside.send('debug-info', 'EQ ON: Ladspa Plugin caps.so loaded with number '+active_module)
   eq_state = "on"
     
 
 def set_eq_off():
   global active_module
+  global inactive_module
   global eq_state
 
   if (active_module != ""):
-    output = subprocess.getoutput('pactl unload-module module-ladspa-sink')
+    #output = subprocess.getoutput('pactl unload-module module-ladspa-sink')
+    output = subprocess.getoutput('pactl unload-module '+active_module)
+    output = subprocess.getoutput('pactl -- set-sink-volume 0 +'+volume_offset+'%') # decrease volume, because ther is a slight volume increase when eq on
     #pyotherside.send('debug-info', 'EQ OFF: pulseaudio plugins with name -module-ladspa-sink unloadeded')
 
   active_module = ""
@@ -151,6 +194,7 @@ def get_slider_16k(slider_16k):
 def set_eq():
 
   global active_module
+  global inactive_module
   global control
 
   control = slider_values['Hz31']+ \

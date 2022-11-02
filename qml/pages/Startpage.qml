@@ -27,7 +27,7 @@ Rectangle {
         ColumnLayout{
             id: main_column
             spacing: root.height * 0.02
-            Layout.fillWidth: true
+            
             Layout.preferredWidth: root.width * 0.96
             Layout.preferredHeight: root.height
 
@@ -37,11 +37,37 @@ Rectangle {
                 }
 
             Text{
-                width: root.width * 0.96
-                wrapMode: text.WordWrap
-                //text: "EQ will set your sound output fixed to speaker. \nOutput source selection is not implemented yet.  \nEQ Preset not implemented yet. \nBalancing not implemented yet."
-                text: "EQ will set your sound output fixed to speaker. Output source selection is not implemented yet. EQ Preset not implemented yet. Balancing not implemented yet."
+                Layout.fillWidth: true
+                wrapMode: Text.WordWrap
+                text: "<ul><li>ReleaseEQ will set your sound output fixed to speaker.</li>\
+                <li>Output source selection is not implemented yet.</li> \
+                <li>EQ Preset not implemented yet. \nBalancing not implemented yet.</li></ul>"
             }
+
+            ListView {
+                Layout.fillWidth: true
+
+                model: ListModel {
+                    id: sink_list
+                }
+                delegate: Text {
+                    // Both "name" and "team" are taken from the model
+                    text: sink_name
+                }
+            }
+            // ComboBox {
+            //     id: combo_output
+            //     enabled: true
+            //     Layout.fillWidth: true
+
+            //     model: ListModel {
+            //     id: sink_list
+            //     }
+            //     delegate: Text {
+            //     text: sink_name
+            //     }
+            //     onActivated: (index) => { print(textAt(index)) }
+            // }     
 
         }
 

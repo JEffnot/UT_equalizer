@@ -41,12 +41,19 @@ Rectangle {
                         id: lbl_select_output
                         Layout.fillWidth: true
                         text: "Select Audio-Output: "
-                        fontSizeMode: Text.Fit
                     }
                     ComboBox {
                         id: combo_output
                         enabled: true
                         Layout.fillWidth: true
+
+                        //model: ListModel {
+                        //    id: sink_list
+                        // }
+
+                        // delegate: Text {
+                        // text: sink_name
+                        // }
                         model: ListModel {
                             ListElement { text: "Speaker" }
                             ListElement { text: "Heaphone Jack" }

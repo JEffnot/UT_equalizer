@@ -51,7 +51,7 @@ Rectangle {
                 from: -10
                 to: 10
                 stepSize: 1
-                snapMode: SnapAlways
+                snapMode: Dial.SnapAlways
                 value: 0
                 live: true
                 Keys.onLeftPressed: {}

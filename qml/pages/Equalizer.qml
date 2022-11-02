@@ -78,8 +78,8 @@ Rectangle {
                         to: max_dB
                         stepSize: slider_step
                         value: 0.0
-                        live: fale // true
-                        snapMode: slider_snapMode
+                        live: false // true
+                        snapMode: Slider.SnapAlways
                         orientation: Qt.Vertical
                         onMoved: {
                             lbl_31dB.text=value
@@ -118,8 +118,8 @@ Rectangle {
                         to: max_dB
                         stepSize: slider_step
                         value: 0.0
-                        live: true
-                        snapMode: slider_snapMode
+                        live: slider_liveMode
+                        snapMode: Slider.SnapAlways
                         orientation: Qt.Vertical
                         onMoved: {
                             lbl_62dB.text=value
@@ -157,8 +157,8 @@ Rectangle {
                         to: max_dB
                         stepSize: slider_step
                         value: 0.0
-                        live: true
-                        snapMode: slider_snapMode
+                        live: slider_liveMode
+                        snapMode: Slider.SnapAlways
                         orientation: Qt.Vertical
                         onMoved: {
                             lbl_125dB.text=value
@@ -197,8 +197,8 @@ Rectangle {
                         to: max_dB
                         stepSize: slider_step
                         value: 0.0
-                        live: true
-                        snapMode: slider_snapMode
+                        live: slider_liveMode
+                        snapMode: Slider.SnapAlways
                         orientation: Qt.Vertical
                         onMoved: {
                             lbl_250dB.text=value
@@ -237,8 +237,8 @@ Rectangle {
                         to: max_dB
                         stepSize: slider_step
                         value: 0.0
-                        live: true
-                        snapMode: slider_snapMode
+                        live: slider_liveMode
+                        snapMode: Slider.SnapAlways
                         orientation: Qt.Vertical
                         onMoved: {
                             lbl_500dB.text=value
@@ -277,8 +277,8 @@ Rectangle {
                         to: max_dB
                         stepSize: slider_step
                         value: 0.0
-                        live: true
-                        snapMode: slider_snapMode
+                        live: slider_liveMode
+                        snapMode: Slider.SnapAlways
                         orientation: Qt.Vertical
                         onMoved: {
                             lbl_1kdB.text=value
@@ -316,8 +316,8 @@ Rectangle {
                         to: max_dB
                         stepSize: slider_step
                         value: 0.0
-                        live: true
-                        snapMode: slider_snapMode
+                        live: slider_liveMode
+                        snapMode: Slider.SnapAlways
                         orientation: Qt.Vertical
                         onMoved: {
                             lbl_2kdB.text=value
@@ -355,8 +355,8 @@ Rectangle {
                         to: max_dB
                         stepSize: slider_step
                         value: 0.0
-                        live: true
-                        snapMode: slider_snapMode
+                        live: slider_liveMode
+                        snapMode: Slider.SnapAlways
                         orientation: Qt.Vertical
                         onMoved: {
                             lbl_4kdB.text=value
@@ -394,8 +394,8 @@ Rectangle {
                         to: max_dB
                         stepSize: slider_step
                         value: 0.0
-                        live: true
-                        snapMode: slider_snapMode
+                        live: slider_liveMode
+                        snapMode: Slider.SnapAlways
                         orientation: Qt.Vertical
                         onMoved: {
                             lbl_8kdB.text=value
@@ -432,8 +432,8 @@ Rectangle {
                         to: max_dB
                         stepSize: slider_step
                         value: 0.0
-                        live: true
-                        snapMode: slider_snapMode
+                        live: slider_liveMode
+                        snapMode: Slider.SnapAlways
                         orientation: Qt.Vertical
                         onMoved: {
                             lbl_16kdB.text=value
