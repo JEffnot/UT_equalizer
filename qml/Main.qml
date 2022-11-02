@@ -36,10 +36,8 @@ MainView {
     property var max_dB: 15
     property var min_dB: -15
     property var slider_step: 3 // dB
-    //property string Slider.SnapAlways: Slider.SnapAlways//SnapOnRelease
     property bool slider_liveMode: true
     property var slider_offset: 0
-    property var root_sink_list: []
     
     SwipeView {
         id: view
@@ -47,27 +45,33 @@ MainView {
         anchors.fill: parent
 
         Item {
-            id: page_Startpage
+            id: item_Startpage
             clip:true
             Page.Startpage {
-                sink_list : root_sink_list
+                id: page_Startpage
             }
         }
 
         Item {
-            id: page_Config
+            id: item_Config
             clip:true
-            Page.Config {}
+            Page.Config {
+                id: page_Config
+            }
         }
         Item {
-            id: page_Equalizer
+            id: item_Equalizer
             clip: true
-            Page.Equalizer {}
+            Page.Equalizer {
+                id: page_Equalizer
+            }
         }
         Item {
-            id: page_Pan
+            id: item_Pan
             clip:true
-            Page.Pan {}
+            Page.Pan {
+                id: page_Pan
+            }
         }
     }
 
@@ -94,11 +98,6 @@ MainView {
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
-    ListModel {
-        id: root_sink_list
-        }
-
-
 
 
     Python {
@@ -116,10 +115,7 @@ MainView {
                 python.call('example.get_devices', [], function(result) {
                     // Load the received data into the list model
                     for (var i=0; i<result.length; i++) {
-                        //console.log(result[i]);
-                        root_sink_list.append({"text": result[i]["sink_name"]});
-                        //root_sink_list.append({"text": "HelloWorld "+i});
-                        console.log(root_sink_list.get(i).text);
+                        page_Config.sink_list.append({"text": result[i]["sink_name"]});
                     }
                 });
             });

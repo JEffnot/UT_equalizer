@@ -75,6 +75,11 @@ def get_devices():
   return device_list
 
 
+
+def set_output(audio_output):
+  pyotherside.send('debug-info', "Selected output: "+audio_output) 
+
+
 def check_ladspa_path():
   global export_path_string
   output = subprocess.getoutput('grep -Fx \"'+export_path_string+'\" /home/phablet/.profile')

@@ -11,9 +11,7 @@ import io.thp.pyotherside 1.4
 Rectangle {
     width: root.width
     height: root.height
-    //color: "yellow"
-
-    property var sink_list: []
+    
 
     RowLayout
     {
@@ -58,20 +56,6 @@ Rectangle {
             //     //     text: sink_name
             //     // }
             // }
-
-            ComboBox {
-                id: combo_output
-                enabled: true
-                Layout.fillWidth: true
-
-                model: ListModel {
-                id: sink_list
-                }
-                //delegate: Text {
-                //text: sink_name
-                //}
-                onActivated: (index) => { print(textAt(index)) }
-            }     
 
 
         }

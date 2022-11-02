@@ -11,6 +11,7 @@ Rectangle {
     width: root.width
     height: root.height
     //color: "yellow"
+    property alias sink_list: sink_list
 
     RowLayout
     {
@@ -30,38 +31,31 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredWidth: root.width * 0.96
             Layout.preferredHeight: root.height
-
-
-                RowLayout{
-                    id: panel_output
-                    //Layout.preferredWidth: root.width * 0.96
-                    //Layout.preferredHeight: root.height
+                  
                     
-                    Label{
+            
+
+            Label{
                         id: lbl_select_output
                         Layout.fillWidth: true
                         text: "Select Audio-Output: "
                     }
-                    ComboBox {
+
+            ComboBox {
                         id: combo_output
                         enabled: true
+                        currentIndex: 0
                         Layout.fillWidth: true
 
-                        //model: ListModel {
-                        //    id: sink_list
-                        // }
-
-                        // delegate: Text {
-                        // text: sink_name
-                        // }
                         model: ListModel {
-                            ListElement { text: "Speaker" }
-                            ListElement { text: "Heaphone Jack" }
-                            ListElement { text: "USB DAC" }
+                        id: sink_list
                         }
-                    onActivated: (index) => { print(textAt(index)) }
-                    }     
-                }
+                        onActivated: (index) => {
+                             //print(textAt(index)) 
+                             python.call("example.set_output", [textAt(index)], function () {
+                            })
+                        }
+                    }         
 
         }
 
