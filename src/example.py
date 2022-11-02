@@ -62,13 +62,13 @@ def get_devices():
 
 
   # This is just to get sure, the dictionary is working
-  device_list= [
-        {'sink_name': 'Alpha', 'team': 'red'},
-        {'sink_name': 'Beta', 'team': 'blue'},
-        {'sink_name': 'Gamma', 'team': 'green'},
-        {'sink_name': 'Delta', 'team': 'yellow'},
-        {'sink_name': 'Epsilon', 'team': 'orange'},
-    ]
+  # device_list= [
+  #       {'sink_name': 'Alpha', 'team': 'red'},
+  #       {'sink_name': 'Beta', 'team': 'blue'},
+  #       {'sink_name': 'Gamma', 'team': 'green'},
+  #       {'sink_name': 'Delta', 'team': 'yellow'},
+  #       {'sink_name': 'Epsilon', 'team': 'orange'},
+  #   ]
   
   #pyotherside.send('debug-info', device_list)  
 

@@ -58,7 +58,7 @@ Rectangle {
             //     //     text: sink_name
             //     // }
             // }
-            
+
             ComboBox {
                 id: combo_output
                 enabled: true
@@ -67,9 +67,9 @@ Rectangle {
                 model: ListModel {
                 id: sink_list
                 }
-                delegate: Text {
-                text: sink_name
-                }
+                //delegate: Text {
+                //text: sink_name
+                //}
                 onActivated: (index) => { print(textAt(index)) }
             }     
 

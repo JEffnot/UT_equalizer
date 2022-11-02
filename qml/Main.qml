@@ -39,7 +39,7 @@ MainView {
     //property string Slider.SnapAlways: Slider.SnapAlways//SnapOnRelease
     property bool slider_liveMode: true
     property var slider_offset: 0
-    property var sink_list: []
+    property var root_sink_list: []
     
     SwipeView {
         id: view
@@ -50,7 +50,7 @@ MainView {
             id: page_Startpage
             clip:true
             Page.Startpage {
-                sink_list : root.sink_list
+                sink_list : root_sink_list
             }
         }
 
@@ -94,6 +94,10 @@ MainView {
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
+    ListModel {
+        id: root_sink_list
+        }
+
 
 
 
@@ -112,8 +116,10 @@ MainView {
                 python.call('example.get_devices', [], function(result) {
                     // Load the received data into the list model
                     for (var i=0; i<result.length; i++) {
-                        console.log(result[i]);
-                        root.sink_list.append(result[i]);
+                        //console.log(result[i]);
+                        root_sink_list.append({"text": result[i]["sink_name"]});
+                        //root_sink_list.append({"text": "HelloWorld "+i});
+                        console.log(root_sink_list.get(i).text);
                     }
                 });
             });
